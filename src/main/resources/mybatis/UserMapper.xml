@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yang.myweb.mapper.UserMapper">
+    <!-- 结果集类型 -->
+    <resultMap id="UserMapper" type="com.yang.myweb.entity.User">
+        <!-- 映射字段 -->
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_password" property="userPassword"/>
+        <result column="create_date" property="createDate"/>
+        <result column="modify_date" property="modifyDate"/>
+    </resultMap>
+
+    <select id="getUserByName" resultMap="UserMapper">
+        SELECT user_id, user_name, user_password, create_date, modify_date
+        FROM t_user WHERE user_name = #{userName}
+    </select>
+
+    <insert id="insertUser" parameterType="com.yang.myweb.entity.User">
+        INSERT INTO t_user(user_id, user_name, user_password, create_date, modify_date)
+        VALUE (#{user.userId}, #{user.userName}, #{user.userPassword}, #{user.createDate}, #{user.modifyDate})
+    </insert>
+</mapper>

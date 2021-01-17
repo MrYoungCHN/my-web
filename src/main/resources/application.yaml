@@ -1,0 +1,35 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/amars
+    username: root
+    password: 123456
+  thymeleaf:
+    cache: false
+  redis:
+#    host: localhost
+#    port: 6379
+    password: ''
+    sentinel:
+      master: mymaster
+      nodes: 127.0.0.1:26379,127.0.0.1:26380,127.0.0.1:26381 # 哨兵的IP:Port列表
+    jedis:
+      pool:
+        max-active: 8
+    connect-timeout: 5000
+
+mybatis:
+  mapper-locations: classpath:mybatis/*.xml
+  type-aliases-package: com.yang.myweb.mapper
+
+conf:
+  salt: b528a72126da0a7958dcae480eb5cc41
+#jwt
+jwt:
+  secret: test1@Login(Auth}*^31)&heiMa% #这里可以自己定制
+  expire: 30 # 过期时间,单位分钟
+  header: testProject #随意定制
